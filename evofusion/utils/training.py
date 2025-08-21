@@ -56,4 +56,4 @@ def train(student, teacher, data_loader, epochs=10, lr=1e-3, save_every=5):
         print(f"Epoch {epoch+1}, Loss: {avg_loss:.4f}, Fitness: {score:.4f}")
 
         if (epoch + 1) % save_every == 0:
-            save_student(student, path=f"student_epoch.pt")
+            save_student(student, path="./checkpoints/student.pt")
