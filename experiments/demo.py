@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 import torch
 from torch.utils.data import DataLoader, TensorDataset
 from evofusion.core.student import EvoStudent
+from evofusion.core.save_load import load_student
 from evofusion.utils.training import train
 
 # Dummy dataset
@@ -15,7 +16,10 @@ loader = DataLoader(dataset, batch_size=32)
 
 # Teacher & Student
 teacher = EvoStudent(10, 1, hidden_layers=[128,128])
-student = EvoStudent(10, 1, hidden_layers=[32])
+student = load_student(path="student.pt", input_dim=10)
+
+if FileNotFoundError:
+    student = EvoStudent(10, 1, hidden_layers=[32])
 
 # Train with EvoFusion
 train(student, teacher, loader, epochs=20)
