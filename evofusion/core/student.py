@@ -1,7 +1,5 @@
-import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import random
 
 class EvoStudent(nn.Module):
     def __init__(self, input_dim, output_dim, hidden_layers=[64, 64]):
