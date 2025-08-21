@@ -19,3 +19,4 @@ student = EvoStudent(10, 1, hidden_layers=[32])
 
 # Train with EvoFusion
 train(student, teacher, loader, epochs=20)
+exit()
