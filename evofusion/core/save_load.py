@@ -1,5 +1,9 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 import torch
-from student import EvoStudent
+from evofusion.core.student import EvoStudent
 
 def save_student(student, path="student.pt"):
     torch.save({
