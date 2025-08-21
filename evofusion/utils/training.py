@@ -10,6 +10,7 @@ def train(student, teacher, data_loader, epochs=10, lr=1e-3):
     controller = MetaController()
 
     for epoch in range(epochs):
+        total_loss = 0
         for x, y in data_loader:
             teacher_out = teacher(x).detach()
             student_out = student(x)
@@ -18,7 +19,8 @@ def train(student, teacher, data_loader, epochs=10, lr=1e-3):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
+            total_loss += loss.item()
 
         controller.decide_mutation(student)
         score = fitness_score(student, loss)
-        print(f"Epoch {epoch}, Fitness Score: {score:.4f}")
+        print(f"Epoch {epoch+1}, Loss: {total_loss/len(data_loader):.4f}, Fitness: {score:.4f}")
