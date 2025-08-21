@@ -4,6 +4,8 @@ import torch.nn.functional as F
 class EvoStudent(nn.Module):
     def __init__(self, input_dim, output_dim, hidden_layers=[64, 64]):
         super().__init__()
+        self.input_dim = input_dim
+        self.output_dim = output_dim
         self.hidden_layers = nn.ModuleList([nn.Linear(input_dim if i==0 else hidden_layers[i-1], h) for i,h in enumerate(hidden_layers)])
         self.output_layer = nn.Linear(hidden_layers[-1], output_dim)
         self.activations = [F.relu for _ in hidden_layers]
