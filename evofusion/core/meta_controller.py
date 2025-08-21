@@ -1,6 +1,6 @@
 '''
 Updated by ZhenYu15
-MetaController intelligently guides student architectural mutations based on fitness and performance trends.
+MetaController is a intelligently guides for student architectural mutations based on fitness and performance trends.
 '''
 
 import random
