@@ -1,5 +1,5 @@
 '''
-Use this files By enter this command in terminal => $ python -m experiments.{filenames} - Without ".py"
+Run this demo file By enter this command in terminal => $ python -m experiments.{filename} - Without ".py"
 Authors: ZhenYu15, Iro96 
 '''
 
