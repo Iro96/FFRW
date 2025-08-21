@@ -16,9 +16,10 @@ loader = DataLoader(dataset, batch_size=32)
 
 # Teacher & Student
 teacher = EvoStudent(10, 1, hidden_layers=[128,128])
-student = load_student(path="student.pt", input_dim=10)
+try:
+    student = load_student(path="./checkpoints/student.pt", input_dim=10)
 
-if FileNotFoundError:
+except FileNotFoundError:
     student = EvoStudent(10, 1, hidden_layers=[32])
 
 # Train with EvoFusion
