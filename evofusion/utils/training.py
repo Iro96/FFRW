@@ -7,10 +7,11 @@ import torch.nn as nn
 from evofusion.core.adapter import KnowledgeAdapter
 from evofusion.core.meta_controller import MetaController
 from evofusion.core.fitness import fitness_score
+from evofusion.core.save_load import save_student
 
 
 
-def train(student, teacher, data_loader, epochs=10, lr=1e-3):
+def trainOld(student, teacher, data_loader, epochs=10, lr=1e-3):
     optimizer = torch.optim.Adam(student.parameters(), lr=lr)
     adapter = KnowledgeAdapter(teacher_dim=teacher.output_dim, student_dim=student.output_layer.out_features)
     controller = MetaController()
@@ -30,3 +31,29 @@ def train(student, teacher, data_loader, epochs=10, lr=1e-3):
         controller.decide_mutation(student)
         score = fitness_score(student, loss)
         print(f"Epoch {epoch+1}, Loss: {total_loss/len(data_loader):.4f}, Fitness: {score:.4f}")
+
+def train(student, teacher, data_loader, epochs=10, lr=1e-3, save_every=5):
+    optimizer = torch.optim.Adam(student.parameters(), lr=lr)
+    adapter = KnowledgeAdapter(teacher_dim=teacher.output_dim, student_dim=student.output_dim)
+    controller = MetaController()
+
+    for epoch in range(epochs):
+        total_loss = 0
+        for x, y in data_loader:
+            teacher_out = teacher(x).detach()
+            student_out = student(x)
+            loss = nn.MSELoss()(adapter(teacher_out), student_out)
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            total_loss += loss.item()
+
+        avg_loss = total_loss / len(data_loader)
+        score = fitness_score(student, loss)
+        controller.decide_mutation(student, score)
+
+        print(f"Epoch {epoch+1}, Loss: {avg_loss:.4f}, Fitness: {score:.4f}")
+
+        if (epoch + 1) % save_every == 0:
+            save_student(student, path=f"student_epoch.pt")

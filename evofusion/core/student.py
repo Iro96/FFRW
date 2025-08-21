@@ -16,9 +16,10 @@ class EvoStudent(nn.Module):
         return self.output_layer(x)
 
     def mutate_add_layer(self, new_size=64):
-        """Add a new layer while preserving function"""
         last_size = self.hidden_layers[-1].out_features
         new_layer = nn.Linear(last_size, new_size)
         self.hidden_layers.append(new_layer)
         self.activations.append(F.relu)
         self.output_layer = nn.Linear(new_size, self.output_layer.out_features)
+        self.output_dim = self.output_layer.out_features
+        print(f"[Mutation] Added new layer: {last_size} -> {new_size}")
