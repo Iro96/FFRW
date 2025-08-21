@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
-from core.adapter import KnowledgeAdapter
-from core.meta_controller import MetaController
-from core.fitness import fitness_score
+from ..core.adapter import KnowledgeAdapter
+from ..core.meta_controller import MetaController
+from ..core.fitness import fitness_score
 
 def train(student, teacher, data_loader, epochs=10, lr=1e-3):
     optimizer = torch.optim.Adam(student.parameters(), lr=lr)
