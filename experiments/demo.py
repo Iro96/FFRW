@@ -1,3 +1,8 @@
+'''
+Use this files By enter this command in terminal => $ python -m experiments.{filenames} - Without ".py"
+Authors: ZhenYu15, Iro96 
+'''
+
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
