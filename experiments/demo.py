@@ -1,12 +1,11 @@
 import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 import torch
 from torch.utils.data import DataLoader, TensorDataset
 from evofusion.core.student import EvoStudent
 from evofusion.utils.training import train
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 # Dummy dataset
 X = torch.randn(1000, 10)
