@@ -23,3 +23,4 @@ class MetaController:
             new_size = random.choice([32, 64, 128])
             student.mutate_add_layer(new_size=new_size)
             print(f"[MetaController] Mutation triggered (fitness improvement {improve:.5f})")
+            print("-----------------------------------------------------------------------")
