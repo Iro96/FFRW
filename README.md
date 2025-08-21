@@ -25,7 +25,7 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-Run this command in your terminal
+Run demo version by enter this command in your terminal
 ```bash
 python -m experiments.demo
 ```
