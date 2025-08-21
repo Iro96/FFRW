@@ -1,5 +1,6 @@
 import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 import torch
 import torch.nn as nn
@@ -7,7 +8,7 @@ from evofusion.core.adapter import KnowledgeAdapter
 from evofusion.core.meta_controller import MetaController
 from evofusion.core.fitness import fitness_score
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 
 def train(student, teacher, data_loader, epochs=10, lr=1e-3):
     optimizer = torch.optim.Adam(student.parameters(), lr=lr)
